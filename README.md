@@ -81,9 +81,3 @@ The app will be available at http://localhost:3000.
 # License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-```bash
-
-This is the complete README, formatted for easy copy-pasting into your project. It covers everything from installation to setup and deployment. Let me know if you need further changes!
-
-```
