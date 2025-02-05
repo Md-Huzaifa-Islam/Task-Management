@@ -1,5 +1,8 @@
 "use client";
 import { deleteTask, markTaskAsCompleted, updateTask } from "@/app/actions";
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,7 +28,7 @@ import { Trash2 } from "lucide-react";
 import "react-datepicker/dist/react-datepicker.css";
 import { Input } from "./ui/input";
 
-export default function TaskList({ tasks, refetchTasks }) {
+export default function TaskCards({ tasks, refetchTasks }) {
   const handleDelete = async (id) => {
     await deleteTask(id);
     refetchTasks();
@@ -48,7 +51,7 @@ export default function TaskList({ tasks, refetchTasks }) {
       </p>
       <div className="border p-2 pt-4">
         <Table>
-          <TableHeader>
+          {/* <TableHeader>
             <TableRow>
               <TableHead>Title</TableHead>
               <TableHead>Description</TableHead>
@@ -57,23 +60,32 @@ export default function TaskList({ tasks, refetchTasks }) {
               <TableHead>Action</TableHead>
               <TableHead>Delete</TableHead>
             </TableRow>
-          </TableHeader>
+          </TableHeader> */}
           <TableBody>
             {tasks.map((task) => (
               <TableRow key={task?._id}>
-                <TableCell>{task?.title}</TableCell>
-                <TableCell>{task?.description}</TableCell>
-                <TableCell>{task?.dueDate}</TableCell>
+                <TableCell>
+                  <p className={task?.completed && "line-through"}>
+                    {task?.title}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={task?.completed && "line-through"}>
+                    {task?.description}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <p className={task?.completed && "line-through"}>
+                    {task?.dueDate}
+                  </p>
+                </TableCell>
 
                 <TableCell>
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={task?.completed && "hidden"}
-                      >
-                        Edit
-                      </Button>
+                      <button className={task?.completed && "hidden"}>
+                        <CiEdit color="#000000" />
+                      </button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
@@ -117,21 +129,20 @@ export default function TaskList({ tasks, refetchTasks }) {
                   </AlertDialog>
                 </TableCell>
                 <TableCell>
-                  <Button
-                    variant="outline"
+                  <button
                     disabled={task?.completed}
                     onClick={() => handleMarkTaskAsCompleted(task?._id)}
                   >
-                    {task?.completed ? "Done" : "Complete"}
-                  </Button>
+                    {task?.completed ? "Done" : <FaCheck />}
+                  </button>
                 </TableCell>
                 <TableCell>
                   {" "}
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button variant="outline">
-                        <Trash2 />
-                      </Button>
+                      <button>
+                        <MdDeleteOutline size={20} />
+                      </button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>

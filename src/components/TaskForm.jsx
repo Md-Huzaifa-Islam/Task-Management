@@ -27,7 +27,7 @@ export default function TaskForm({ tasks, refetchTasks }) {
         Add a new task
       </p>
       <form
-        className="mx-auto flex max-w-2xl items-center justify-center gap-4"
+        className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2 md:grid-cols-4"
         onSubmit={handleSubmit}
       >
         <Input type="text" id="text" name="title" placeholder="Title" />
@@ -38,7 +38,7 @@ export default function TaskForm({ tasks, refetchTasks }) {
           placeholder="Description"
         />
         <DatePicker
-          className="w-max rounded-md border"
+          className="w-full rounded-md border"
           showIcon
           selected={startDate}
           onChange={(date) => setStartDate(date)}

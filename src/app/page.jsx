@@ -4,6 +4,7 @@ import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
 import { useEffect, useState } from "react";
 import { getTasks } from "./actions";
+import TaskCards from "@/components/TaskCards";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
@@ -28,9 +29,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="grid gap-10 rounded-xl border-2 p-16 shadow-xl shadow-blue-600">
+    <div className="grid gap-10 rounded-xl border-2 p-10 shadow-xl shadow-blue-600 lg:p-16">
       <TaskForm tasks={tasks} refetchTasks={fetchTasks} />
-      <TaskList tasks={tasks} refetchTasks={fetchTasks} />
+      <div className="hidden sm:block">
+        <TaskList tasks={tasks} refetchTasks={fetchTasks} />
+      </div>
+      <div className="sm:hidden">
+        <TaskCards tasks={tasks} refetchTasks={fetchTasks} />
+      </div>
       {loading && <p className="text-center">Loading...</p>}
     </div>
   );
